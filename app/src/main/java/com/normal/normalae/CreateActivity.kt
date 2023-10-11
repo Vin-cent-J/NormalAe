@@ -20,6 +20,7 @@ class CreateActivity : AppCompatActivity() {
 
         val spinnerAdapter = ArrayAdapter(this, R.layout.spinner_layout, Global.genreList)
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_item_layout)
+        bind.spinGenre.adapter = spinnerAdapter
 
         bind.btnNext.setOnClickListener {
             val intent = Intent(this, CreatePage2Activty::class.java)
