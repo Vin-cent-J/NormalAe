@@ -23,6 +23,11 @@ object Global {
                 "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
                 "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
                 true),
+        Cerbung("Airplane!",
+            "After the crew becomes sick with food poisoning, a neurotic ex-fighter pilot must land a commercial airplane full of passengers safely.",
+            "After the crew becomes sick with food poisoning, a neurotic ex-fighter pilot must land a commercial airplane full of passengers safely.",
+            "https://upload.wikimedia.org/wikipedia/en/2/21/Airplane%21_%281980_film%29.jpg",
+            true),
         )
 
     var users = arrayListOf(
