@@ -22,7 +22,7 @@ class ReadActivity : AppCompatActivity() {
             builder.listener{picasso, url, exception->exception.printStackTrace()}
             builder.build().load(url).into(imageView)
             lblTitleRead.text = Global.cerbungs[id].title
-            txtDesc.text = Global.cerbungs[id].description
+            txtReadParagraph.text = Global.cerbungs[id].paragraph
         }
     }
 }

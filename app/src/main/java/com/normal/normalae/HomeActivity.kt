@@ -1,5 +1,6 @@
 package com.normal.normalae
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,5 +19,10 @@ class HomeActivity : AppCompatActivity() {
         bind.recyclerView.layoutManager = lm
         bind.recyclerView.setHasFixedSize(true)
         bind.recyclerView.adapter = CerbungAdapter()
+
+        bind.btnCreate.setOnClickListener {
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

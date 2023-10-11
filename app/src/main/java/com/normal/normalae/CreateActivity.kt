@@ -1,12 +1,17 @@
 package com.normal.normalae
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.normal.normalae.databinding.ActivityCreateBinding
 
 class CreateActivity : AppCompatActivity() {
-    lateinit var bind: ActivityCreateBinding
+    private lateinit var bind: ActivityCreateBinding
+    companion object{
+        val TITLE = "com.normal.normalae.title"
+        val DESC = "com.normal.normalae.desc"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityCreateBinding.inflate(layoutInflater)
@@ -16,5 +21,11 @@ class CreateActivity : AppCompatActivity() {
         val spinnerAdapter = ArrayAdapter(this, R.layout.spinner_layout, Global.genreList)
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_item_layout)
 
+        bind.btnNext.setOnClickListener {
+            val intent = Intent(this, CreatePage2Activty::class.java)
+            intent.putExtra(TITLE, bind.txtTitle.text.toString())
+            intent.putExtra(DESC, bind.txtDescription.text.toString())
+            startActivity(intent)
+        }
     }
 }

@@ -15,6 +15,12 @@
         android:theme="@style/Theme.NormalAe"
         tools:targetApi="31">
         <activity
+            android:name=".CreatePage3Actvity"
+            android:exported="false" />
+        <activity
+            android:name=".CreatePage2Activty"
+            android:exported="false" />
+        <activity
             android:name=".ReadActivity"
             android:exported="false" />
         <activity

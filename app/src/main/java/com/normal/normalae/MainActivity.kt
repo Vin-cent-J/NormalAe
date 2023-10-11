@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         bind.btnSignin.setOnClickListener {
-            if(bind.txtPassword.text.toString() == Global.users[0].password
-                && bind.txtUsername.text.toString() == Global.users[0].username){
+            var user = User(bind.txtPassword.text.toString(), bind.txtUsername.text.toString())
+            if(Global.users.contains(user)){
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }
