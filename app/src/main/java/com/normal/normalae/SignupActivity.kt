@@ -27,7 +27,7 @@ class SignupActivity : AppCompatActivity() {
             else if(bind.txtPwd.text.toString() == bind.txtPwdConfirmation.text.toString()){
                 var user = User(bind.txtUName.text.toString(), bind.txtPwd.text.toString())
                 val q = Volley.newRequestQueue(this)
-                val url = "https://ubaya.me/native/160421044/set_likes.php"
+                val url = "https://ubaya.me/native/160421053/register.php"
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
                     Response.Listener {
                         Log.d("cekparams", it)
