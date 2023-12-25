@@ -9,7 +9,10 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
+import com.google.gson.Gson
 import com.normal.normalae.databinding.ActivityMainBinding
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bind: ActivityMainBinding
@@ -28,6 +31,15 @@ class MainActivity : AppCompatActivity() {
                 Request.Method.POST, url,
                 Response.Listener {
                     Log.d("cekparams", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "OK") {
+                        val data = obj.getJSONArray("data")
+                        val sType = object : TypeToken<ArrayList<User>>() {}.type
+                        Global.users = Gson().fromJson(data.toString(), sType) as
+                                ArrayList<User>
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
                 },
                 Response.ErrorListener {
                     Log.d("cekparams", it.message.toString())
