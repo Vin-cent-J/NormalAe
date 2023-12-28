@@ -58,7 +58,7 @@ class CreatePage3Actvity : AppCompatActivity() {
             {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    params["user"] = Global.user?.username.toString()
+                    params["user"] = Global.users[0].username
                     params["title"] = title.toString()
                     params["desc"] = desc.toString()
                     params["url"] = url
