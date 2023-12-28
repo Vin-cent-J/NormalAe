@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             val url = "https://ubaya.me/native/160421053/login.php"
             val stringRequest = object : StringRequest(
                 Request.Method.POST, url,
-                Response.Listener {
+                Response.Listener<String> {
                     Log.d("cekparams", it)
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "OK") {
@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
                     }
+                    else{
+                        Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    }
                 },
                 Response.ErrorListener {
                     Log.d("cekparams", it.message.toString())
@@ -47,8 +50,8 @@ class MainActivity : AppCompatActivity() {
             {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    params["username"] = bind.txtUsername.text.toString()
-                    params["password"] = bind.txtPassword.text.toString()
+                    params["username"] = user.username
+                    params["password"] = user.password
 
                     return params
                 }
