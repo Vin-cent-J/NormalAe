@@ -34,6 +34,9 @@ class CreatePage3Actvity : AppCompatActivity() {
         val RAD = CreatePage2Activty.RAD
         val rad = getIntent().getIntExtra(RAD, 1)
 
+        val URL = CreateActivity.URL
+        val url = getIntent().getStringExtra(URL)
+
         with(bind){
             txtCheckDesc.text = desc
             txtCheckPar.text = par
@@ -46,9 +49,9 @@ class CreatePage3Actvity : AppCompatActivity() {
 
         bind.btnPublish.setOnClickListener {
             val q = Volley.newRequestQueue(this)
-            val url = "https://ubaya.me/native/160421053/add_cerbung.php"
+            val uri = "https://ubaya.me/native/160421053/add_cerbung.php"
             val stringRequest = object : StringRequest(
-                Request.Method.POST, url,
+                Request.Method.POST, uri,
                 Response.Listener {
                     Log.d("cekparams", it)
                 },
@@ -61,7 +64,7 @@ class CreatePage3Actvity : AppCompatActivity() {
                     params["user"] = Global.users[0].username
                     params["title"] = title.toString()
                     params["desc"] = desc.toString()
-                    params["url"] = url
+                    params["url"] = url.toString()
                     params["public"] = rad.toString()
                     params["paragraph"] = par.toString()
                     return params

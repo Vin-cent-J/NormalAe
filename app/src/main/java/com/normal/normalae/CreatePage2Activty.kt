@@ -31,6 +31,9 @@ class CreatePage2Activty : AppCompatActivity() {
         val DESC = CreateActivity.DESC
         val desc = getIntent().getStringExtra(DESC)
 
+        val URL = CreateActivity.URL
+        val url = getIntent().getStringExtra(URL)
+
         var public = 0
         if(bind.rdPublic.isChecked){
             public = 1
@@ -38,7 +41,8 @@ class CreatePage2Activty : AppCompatActivity() {
 
         bind.btnNext2.setOnClickListener {
             intent.putExtra(TITLE, title)
-            intent.putExtra(DESC, title)
+            intent.putExtra(DESC, desc)
+            intent.putExtra(URL, url)
             intent.putExtra(PAR, bind.txtParagraph.text.toString())
             intent.putExtra(RAD, public)
             startActivity(intent)

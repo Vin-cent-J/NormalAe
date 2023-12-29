@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
         val view = bind.root
         setContentView(view)
 
+        var cerbungs: ArrayList<Cerbung> = ArrayList()
         val q = Volley.newRequestQueue(this)
         val url = "https://ubaya.me/native/160421053/get_cerbung.php"
         var stringRequest = StringRequest(
@@ -33,9 +34,9 @@ class HomeActivity : AppCompatActivity() {
                 if(obj.getString("result") == "OK") {
                     val data = obj.getJSONArray("data")
                     val sType = object : TypeToken<ArrayList<Cerbung>>() {}.type
-                    Global.cerbungs = Gson().fromJson(data.toString(), sType) as
+                    cerbungs = Gson().fromJson(data.toString(), sType) as
                             ArrayList<Cerbung>
-                    updateList()
+                    updateList(cerbungs)
                 }
             },
             Response.ErrorListener {
@@ -46,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
         val lm: LinearLayoutManager = LinearLayoutManager(this)
         bind.recyclerView.layoutManager = lm
         bind.recyclerView.setHasFixedSize(true)
-        bind.recyclerView.adapter = CerbungAdapter()
+        bind.recyclerView.adapter = CerbungAdapter(cerbungs)
 
         bind.btnCreate.setOnClickListener {
             val intent = Intent(this, CreateActivity::class.java)
@@ -54,12 +55,12 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    fun updateList() {
+    fun updateList(cerbungs: ArrayList<Cerbung>) {
         val lm = LinearLayoutManager(this)
         with(bind.recyclerView) {
             layoutManager = lm
             setHasFixedSize(true)
-            adapter = CerbungAdapter()
+            adapter = CerbungAdapter(cerbungs)
         }
     }
 }

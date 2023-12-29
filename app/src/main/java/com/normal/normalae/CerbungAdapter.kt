@@ -15,7 +15,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
-class CerbungAdapter():RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() {
+class CerbungAdapter(var cerbungs: ArrayList<Cerbung>):RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() {
     class CerbungViewHolder(val bind: CerbungItemBinding):RecyclerView.ViewHolder(bind.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CerbungViewHolder{
@@ -24,7 +24,7 @@ class CerbungAdapter():RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() 
     }
 
     override fun getItemCount(): Int {
-        return Global.cerbungs.size
+        return cerbungs.size
     }
 
     companion object{
@@ -32,18 +32,18 @@ class CerbungAdapter():RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: CerbungViewHolder, position: Int) {
-        val url = Global.cerbungs[position].url
+        val url = cerbungs[position].url
         val builder = Picasso.Builder(holder.itemView.context)
         builder.listener{picasso, url, exception->exception.printStackTrace()}
 
         val intent = Intent(holder.itemView.context, ReadActivity::class.java)
-        intent.putExtra(ID, holder.adapterPosition)
+        intent.putExtra(ID, cerbungs[holder.adapterPosition].id)
         with(holder.bind){
             builder.build().load(url).into(imgCerbung)
-            lblTitle.text=Global.cerbungs[position].title
-            lblDesc.text=Global.cerbungs[position].desc
-            lblUser.text= "By: "+Global.cerbungs[position].user_username
-            btnLike.text=Global.cerbungs[position].likes.toString()
+            lblTitle.text=cerbungs[position].title
+            lblDesc.text=cerbungs[position].desc
+            lblUser.text= "By: "+cerbungs[position].user_username
+            btnLike.text=cerbungs[position].likes.toString()
         }
 
         holder.bind.btnRead.setOnClickListener {
@@ -56,8 +56,8 @@ class CerbungAdapter():RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() 
                 Request.Method.POST, url,
                 Response.Listener {
                     Log.d("cekparams", it)
-                    Global.cerbungs[position].likes++
-                    var newlikes = Global.cerbungs[holder.adapterPosition].likes
+                    cerbungs[position].likes++
+                    var newlikes = cerbungs[holder.adapterPosition].likes
                     holder.bind.btnLike.text = "$newlikes"
                 },
                 Response.ErrorListener {
@@ -66,7 +66,7 @@ class CerbungAdapter():RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() 
             {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    params["id"] = Global.cerbungs[holder.adapterPosition].id.toString()
+                    params["id"] = cerbungs[holder.adapterPosition].id.toString()
 
                     return params
                 }

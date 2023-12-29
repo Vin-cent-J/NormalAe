@@ -11,6 +11,7 @@ class CreateActivity : AppCompatActivity() {
     companion object{
         val TITLE = "com.normal.normalae.title"
         val DESC = "com.normal.normalae.desc"
+        val URL = "com.normal.normalae.url"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class CreateActivity : AppCompatActivity() {
             val intent = Intent(this, CreatePage2Activty::class.java)
             intent.putExtra(TITLE, bind.txtTitle.text.toString())
             intent.putExtra(DESC, bind.txtDescription.text.toString())
+            intent.putExtra(URL, bind.txtUrlCover.text.toString())
             startActivity(intent)
         }
     }

@@ -25,7 +25,7 @@ class SignupActivity : AppCompatActivity() {
                 Toast.makeText(this, "Fill in the empty fields", Toast.LENGTH_SHORT).show()
             }
             else if(bind.txtPwd.text.toString() == bind.txtPwdConfirmation.text.toString()){
-                var user = User(bind.txtUName.text.toString(), bind.txtPwd.text.toString())
+                var user = User(bind.txtUName.text.toString(), bind.txtPwd.text.toString(), bind.txtUrlPP.toString())
                 val q = Volley.newRequestQueue(this)
                 val url = "https://ubaya.me/native/160421053/register.php"
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
