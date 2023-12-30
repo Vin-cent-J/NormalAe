@@ -90,9 +90,16 @@ class CerbungAdapter(var cerbungs: ArrayList<Cerbung>):RecyclerView.Adapter<Cerb
                 Request.Method.POST, url,
                 Response.Listener {
                     Log.d("cekparams", it)
-                    cerbungs[position].likes++
-                    var newlikes = cerbungs[holder.adapterPosition].likes
-                    holder.bind.btnLike.text = "$newlikes"
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "OK"){
+                        cerbungs[position].likes++
+                        var newFol = cerbungs[holder.adapterPosition].likes
+                        holder.bind.btnLike.text = "$newFol"
+                    }else{
+                        cerbungs[position].likes--
+                        var newFol = cerbungs[holder.adapterPosition].likes
+                        holder.bind.btnLike.text = "$newFol"
+                    }
                 },
                 Response.ErrorListener {
                     Log.d("cekparams", it.message.toString())
@@ -100,6 +107,7 @@ class CerbungAdapter(var cerbungs: ArrayList<Cerbung>):RecyclerView.Adapter<Cerb
             {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
+                    params["username"] = Global.user?.username.toString()
                     params["id"] = cerbungs[holder.adapterPosition].id.toString()
 
                     return params

@@ -26,7 +26,7 @@ class ReadActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra(CerbungAdapter.ID, 0)
 
-        val lm: LinearLayoutManager = LinearLayoutManager(this)
+        val lm = LinearLayoutManager(this)
 
         var cerbung: Cerbung? = null
         val q = Volley.newRequestQueue(this)
