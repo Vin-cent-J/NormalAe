@@ -35,10 +35,12 @@ class MainActivity : AppCompatActivity() {
                     if(obj.getString("result") == "OK") {
                         val data = obj.getJSONArray("data")
                         val sType = object : TypeToken<ArrayList<User>>() {}.type
-                        Global.users = Gson().fromJson(data.toString(), sType) as
+                        Global.users  = Gson().fromJson(data.toString(), sType) as
                                 ArrayList<User>
+                        Global.user = Global.users[0];
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                     else{
                         Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()

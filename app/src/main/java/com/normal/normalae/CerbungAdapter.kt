@@ -14,6 +14,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 class CerbungAdapter(var cerbungs: ArrayList<Cerbung>):RecyclerView.Adapter<CerbungAdapter.CerbungViewHolder>() {
     class CerbungViewHolder(val bind: CerbungItemBinding):RecyclerView.ViewHolder(bind.root)
@@ -44,10 +45,43 @@ class CerbungAdapter(var cerbungs: ArrayList<Cerbung>):RecyclerView.Adapter<Cerb
             lblDesc.text=cerbungs[position].desc
             lblUser.text= "By: "+cerbungs[position].user_username
             btnLike.text=cerbungs[position].likes.toString()
+            btnFol.text=cerbungs[position].follow.toString()
         }
 
         holder.bind.btnRead.setOnClickListener {
             startActivity(holder.itemView.context, intent, null)
+        }
+        holder.bind.btnFol.setOnClickListener {
+            val q = Volley.newRequestQueue(holder.itemView.context)
+            val url = "https://ubaya.me/native/160421053/follow.php"
+            val stringRequest = object : StringRequest(
+                Request.Method.POST, url,
+                Response.Listener {
+                    Log.d("cekparams", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "OK"){
+                        cerbungs[position].follow++
+                        var newFol = cerbungs[holder.adapterPosition].follow
+                        holder.bind.btnFol.text = "$newFol"
+                    }else{
+                        cerbungs[position].follow--
+                        var newFol = cerbungs[holder.adapterPosition].follow
+                        holder.bind.btnFol.text = "$newFol"
+                    }
+                },
+                Response.ErrorListener {
+                    Log.d("cekparams", it.message.toString())
+                })
+            {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params["id"] = cerbungs[holder.adapterPosition].id.toString()
+                    params["username"] = Global.user?.username.toString()
+
+                    return params
+                }
+            }
+            q.add(stringRequest)
         }
         holder.bind.btnLike.setOnClickListener {
             val q = Volley.newRequestQueue(holder.itemView.context)

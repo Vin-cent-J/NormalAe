@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.text.set
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
@@ -64,6 +65,40 @@ class ReadActivity : AppCompatActivity() {
             }
         }
         q.add(stringRequest)
+
+        bind.btnSubmit.setOnClickListener {
+            val txt = bind.txtContinue.text
+            val q = Volley.newRequestQueue(this)
+            val url = "https://ubaya.me/native/160421053/add_paragraph.php"
+            val stringRequest = object : StringRequest(
+                Request.Method.POST, url,
+                Response.Listener {
+                    Log.d("cekparams", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "OK"){
+                        val par = Paragraph(Global.user!!.username, id, bind.txtContinue.text.toString())
+                        cerbung!!.paragraph.add(par)
+                        updateList(cerbung!!)
+                        bind.txtContinue.setText("")
+                    }
+                },
+                Response.ErrorListener {
+                    Log.d("cekparams", it.message.toString())
+                })
+            {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params["id"] = id.toString()
+                    params["username"] = Global.user?.username.toString()
+                    params["text"] = bind.txtContinue.text.toString()
+
+                    return params
+                }
+            }
+            q.add(stringRequest)
+        }
+
+
     }
 
     fun updateList(cerbung: Cerbung) {

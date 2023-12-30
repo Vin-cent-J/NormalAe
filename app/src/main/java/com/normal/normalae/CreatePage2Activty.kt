@@ -34,9 +34,10 @@ class CreatePage2Activty : AppCompatActivity() {
         val URL = CreateActivity.URL
         val url = getIntent().getStringExtra(URL)
 
-        var public = 0
-        if(bind.rdPublic.isChecked){
-            public = 1
+        var public = if(bind.rdPublic.isChecked){
+            1
+        } else{
+            0
         }
 
         bind.btnNext2.setOnClickListener {
@@ -49,7 +50,7 @@ class CreatePage2Activty : AppCompatActivity() {
         }
 
         bind.btnPrev2.setOnClickListener {
-            startActivity(prev)
+            finish()
         }
     }
 }

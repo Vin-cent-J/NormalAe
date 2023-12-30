@@ -31,6 +31,9 @@ class SignupActivity : AppCompatActivity() {
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
                     Response.Listener {
                         Log.d("cekparams", it)
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     },
                     Response.ErrorListener {
                         Log.d("cekparams", it.message.toString())

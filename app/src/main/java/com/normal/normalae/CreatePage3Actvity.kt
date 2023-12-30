@@ -44,7 +44,7 @@ class CreatePage3Actvity : AppCompatActivity() {
         }
 
         bind.btnPrev3.setOnClickListener {
-            startActivity(prev)
+            finish()
         }
 
         bind.btnPublish.setOnClickListener {
