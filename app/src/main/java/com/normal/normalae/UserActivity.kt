@@ -3,13 +3,13 @@ package com.normal.normalae
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.normal.normalae.databinding.ActivityPrefsBinding
+import com.normal.normalae.databinding.ActivityUserBinding
 
-class PrefsActivity : AppCompatActivity() {
-    private lateinit var bind: ActivityPrefsBinding
+class UserActivity : AppCompatActivity() {
+    private lateinit var bind: ActivityUserBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = ActivityPrefsBinding.inflate(layoutInflater)
+        bind = ActivityUserBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
         bind.bottomNav.selectedItemId = R.id.itemPrefs
@@ -25,12 +25,12 @@ class PrefsActivity : AppCompatActivity() {
                     finish()
                     overridePendingTransition(0,0)
                 }
-                R.id.itemPrefs -> {}
-                R.id.itemUser -> {
-                    startActivity(Intent(this, UserActivity::class.java))
+                R.id.itemPrefs -> {
+                    startActivity(Intent(this, PrefsActivity::class.java))
                     finish()
                     overridePendingTransition(0,0)
                 }
+                R.id.itemUser -> {}
                 else -> {
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
