@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         bind.btnSignin.setOnClickListener {
-            var user = User(bind.txtPassword.text.toString(), bind.txtUsername.text.toString(), "")
+            var user = User(bind.txtUsername.text.toString(), bind.txtPassword.text.toString(), "")
             val q = Volley.newRequestQueue(this)
             val url = "https://ubaya.me/native/160421053/login.php"
             val stringRequest = object : StringRequest(
