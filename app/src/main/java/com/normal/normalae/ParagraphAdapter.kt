@@ -29,7 +29,7 @@ class ParagraphAdapter(val cerbung: Cerbung): RecyclerView.Adapter<ParagraphAdap
     override fun onBindViewHolder(holder: ParagraphViewHolder, position: Int) {
         with(holder.bind) {
             txtPar.text = cerbung.paragraph[position].text
-            txtWriter.text = "By: " + cerbung.paragraph[position].user_username
+            txtWriter.text = "By " + cerbung.paragraph[position].user_username
         }
     }
 }

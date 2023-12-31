@@ -40,8 +40,8 @@ class FollowedAdapter(var cerbungs: ArrayList<Cerbung>): RecyclerView.Adapter<Fo
         intent.putExtra(ID, cerbungs[holder.adapterPosition].id)
         with(holder.bind){
             builder.build().load(url).into(imgFCerbung)
-            lblFTitle.text=cerbungs[position].title
-            lblFWriter.text= "By: "+cerbungs[position].user_username
+            lblFTitle.text = cerbungs[position].title
+            lblFWriter.text = cerbungs[position].user_username
         }
 
         holder.bind.cardFollow.setOnClickListener {

@@ -43,7 +43,7 @@ class CerbungAdapter(var cerbungs: ArrayList<Cerbung>):RecyclerView.Adapter<Cerb
             builder.build().load(url).into(imgCerbung)
             lblTitle.text=cerbungs[position].title
             lblDesc.text=cerbungs[position].desc
-            lblUser.text= "By: "+cerbungs[position].user_username
+            lblUser.text= "By "+cerbungs[position].user_username
             btnLike.text=cerbungs[position].likes.toString()
             btnFol.text=cerbungs[position].follow.toString()
         }

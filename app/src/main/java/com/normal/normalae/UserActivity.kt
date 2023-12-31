@@ -12,7 +12,7 @@ class UserActivity : AppCompatActivity() {
         bind = ActivityUserBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
-        bind.bottomNav.selectedItemId = R.id.itemPrefs
+        bind.bottomNav.selectedItemId = R.id.itemUser
         bind.bottomNav.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.itemHome -> {

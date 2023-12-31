@@ -3,6 +3,7 @@ package com.normal.normalae
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.RadioButton
 import com.normal.normalae.databinding.ActivityCreatePage2ActivtyBinding
 
 class CreatePage2Activty : AppCompatActivity() {
@@ -38,6 +39,14 @@ class CreatePage2Activty : AppCompatActivity() {
             1
         } else{
             0
+        }
+        bind.rdAccess.setOnCheckedChangeListener { group, i ->
+            val radio = group.findViewById<RadioButton>(i)
+            public = if(radio == bind.rdPublic){
+                1
+            } else{
+                0
+            }
         }
 
         bind.btnNext2.setOnClickListener {
