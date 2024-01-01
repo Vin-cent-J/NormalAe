@@ -54,31 +54,36 @@ class PrefsActivity : AppCompatActivity() {
         }
 
         bind.btnChange.setOnClickListener {
-            val q = Volley.newRequestQueue(this)
-            val url = "https://ubaya.me/native/160421053/change.php"
-            val stringRequest = object : StringRequest(Request.Method.POST, url, Response.Listener {
-                Log.d("update", it)
-                val obj = JSONObject(it)
-                if(obj.getString("result") == "OK"){
-                    Toast.makeText(this, "Password has been changed successfully", Toast.LENGTH_SHORT).show()
+            if(bind.txtOldPass.text.toString() == bind.txtConPass.text.toString()){
+                val q = Volley.newRequestQueue(this)
+                val url = "https://ubaya.me/native/160421053/change.php"
+                val stringRequest = object : StringRequest(Request.Method.POST, url, Response.Listener {
+                    Log.d("update", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "OK"){
+                        Toast.makeText(this, "Password has been changed successfully", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                    Response.ErrorListener {
+                        Log.d("update", it.message.toString())
+                    })
+                {
+                    override fun getParams(): MutableMap<String, String>? {
+                        val params = HashMap<String, String>()
+                        params["username"] = Global.user?.username.toString()
+                        params["password"] = bind.txtNewPass.text.toString()
+                        params["oldPass"] = bind.txtOldPass.text.toString()
+                        return params
+                    }
                 }
-                else{
-                    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                }
-            },
-            Response.ErrorListener {
-                Log.d("update", it.message.toString())
-            })
-            {
-                override fun getParams(): MutableMap<String, String>? {
-                     val params = HashMap<String, String>()
-                    params["username"] = Global.user?.username.toString()
-                    params["password"] = bind.txtNewPass.text.toString()
-                    params["oldPass"] = bind.txtOldPass.text.toString()
-                    return params
-                }
+                q.add(stringRequest)
             }
-            q.add(stringRequest)
+            else{
+                Toast.makeText(this, "Retype New Password correctly", Toast.LENGTH_SHORT).show()
+            }
         }
 
         bind.bottomNav.selectedItemId = R.id.itemPrefs
