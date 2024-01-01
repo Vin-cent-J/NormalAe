@@ -83,6 +83,7 @@
                 android:ems="10"
                 android:hint="New Password"
                 android:inputType="text"
+                android:password="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtOldPass" />
@@ -97,6 +98,7 @@
                 android:ems="10"
                 android:hint="Retype Password"
                 android:inputType="text"
+                android:password="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNewPass" />
