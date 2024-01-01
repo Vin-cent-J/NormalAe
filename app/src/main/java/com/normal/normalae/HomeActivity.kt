@@ -1,9 +1,13 @@
 package com.normal.normalae
 
 import android.content.Intent
+import android.content.res.Resources
+import android.content.res.Resources.Theme
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.NightMode
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
@@ -65,11 +69,6 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.itemPrefs -> {
                     startActivity(Intent(this, PrefsActivity::class.java))
-                    finish()
-                    overridePendingTransition(0,0)
-                }
-                R.id.itemUser -> {
-                    startActivity(Intent(this, UserActivity::class.java))
                     finish()
                     overridePendingTransition(0,0)
                 }

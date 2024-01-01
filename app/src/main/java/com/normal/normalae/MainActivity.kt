@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -22,6 +23,15 @@ class MainActivity : AppCompatActivity() {
         bind = ActivityMainBinding.inflate(layoutInflater)
         val view = bind.root
         setContentView(view)
+
+        val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val isDark = sharedPreferences.getBoolean("Dark", false)
+        if(isDark){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
 
         bind.btnSignin.setOnClickListener {
             var user = User(bind.txtUsername.text.toString(), bind.txtPassword.text.toString(), "")

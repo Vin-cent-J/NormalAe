@@ -68,11 +68,6 @@ class FollowActivity : AppCompatActivity() {
                     finish()
                     overridePendingTransition(0,0)
                 }
-                R.id.itemUser -> {
-                    startActivity(Intent(this, UserActivity::class.java))
-                    finish()
-                    overridePendingTransition(0,0)
-                }
                 else -> {
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()

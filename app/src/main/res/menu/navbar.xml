@@ -19,10 +19,4 @@
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_settings_24"
         android:title="Prefs" />
-    <item
-        android:id="@+id/itemUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_manage_accounts_24"
-        android:title="User" />
 </menu>

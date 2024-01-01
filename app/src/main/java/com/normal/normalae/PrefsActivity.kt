@@ -1,18 +1,19 @@
 package com.normal.normalae
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.gson.reflect.TypeToken
 import com.normal.normalae.databinding.ActivityPrefsBinding
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
+
 
 class PrefsActivity : AppCompatActivity() {
     private lateinit var bind: ActivityPrefsBinding
@@ -20,6 +21,22 @@ class PrefsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityPrefsBinding.inflate(layoutInflater)
         setContentView(bind.root)
+
+        val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val isDarkModeOn = sharedPreferences.getBoolean("Dark", false)
+
+        bind.switchDark.isChecked = isDarkModeOn
+
+        bind.switchDark.setOnCheckedChangeListener { compoundButton, checked ->
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("Dark", checked);
+            editor.apply();
+            if(checked){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         bind.txtPUser.text = Global.user?.username
         val url = Global.user?.url
@@ -78,11 +95,6 @@ class PrefsActivity : AppCompatActivity() {
                     overridePendingTransition(0,0)
                 }
                 R.id.itemPrefs -> {}
-                R.id.itemUser -> {
-                    startActivity(Intent(this, UserActivity::class.java))
-                    finish()
-                    overridePendingTransition(0,0)
-                }
                 else -> {
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
