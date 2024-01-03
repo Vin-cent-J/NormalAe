@@ -96,10 +96,11 @@ class ReadActivity : AppCompatActivity() {
                         Log.d("cekparams", it)
                         val obj = JSONObject(it)
                         if (obj.getString("result") == "OK") {
-                            val par = Paragraph(
+                            val par = Paragraph(obj.getString("data").toInt(),
                                 Global.user!!.username,
                                 id,
-                                bind.txtContinue.text.toString()
+                                bind.txtContinue.text.toString(),
+                                0
                             )
                             cerbung!!.paragraph.add(par)
                             updateList(cerbung!!)

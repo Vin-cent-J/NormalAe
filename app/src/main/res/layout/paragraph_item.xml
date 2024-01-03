@@ -37,6 +37,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
+        android:text="0"
+        android:textColor="#8E8E8E"
         app:icon="@drawable/baseline_thumb_up_24"
         app:iconTint="#50B4F6"
         app:layout_constraintBottom_toBottomOf="parent"
