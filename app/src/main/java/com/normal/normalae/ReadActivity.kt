@@ -64,7 +64,7 @@ class ReadActivity : AppCompatActivity() {
                         recyclerParagraph.adapter= cerbung?.let{ParagraphAdapter(it)}
 
                         if((cerbung?.public == 0) && (Global.user?.username != cerbung?.user_username)
-                            && (access == "null")){
+                            && (access == "null" || access != Global.user?.username)){
                             btnSubmit.text = "Request Access"
                         }
                     }
@@ -84,7 +84,7 @@ class ReadActivity : AppCompatActivity() {
         q.add(stringRequest)
 
         bind.btnSubmit.setOnClickListener {
-            if ((access == "null") && (cerbung?.public == 0) && (Global.user?.username != cerbung?.user_username)) {
+            if ((access == "null" || access != Global.user?.username) && (cerbung?.public == 0) && (Global.user?.username != cerbung?.user_username)) {
                 Toast.makeText(this, "Access Requested", Toast.LENGTH_SHORT).show()
             } else {
                 val txt = bind.txtContinue.text
