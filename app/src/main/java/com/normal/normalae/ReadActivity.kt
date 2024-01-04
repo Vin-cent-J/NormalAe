@@ -84,7 +84,7 @@ class ReadActivity : AppCompatActivity() {
         q.add(stringRequest)
 
         bind.btnSubmit.setOnClickListener {
-            if (access == "null") {
+            if ((access == "null") && (cerbung?.public == 0) && (Global.user?.username != cerbung?.user_username)) {
                 Toast.makeText(this, "Access Requested", Toast.LENGTH_SHORT).show()
             } else {
                 val txt = bind.txtContinue.text

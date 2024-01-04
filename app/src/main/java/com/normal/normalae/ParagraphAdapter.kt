@@ -57,6 +57,7 @@ class ParagraphAdapter(val cerbung: Cerbung): RecyclerView.Adapter<ParagraphAdap
                 {
                     override fun getParams(): MutableMap<String, String> {
                         val params = HashMap<String, String>()
+                        params["username"] = Global.user?.username.toString()
                         params["id"] = cerbung.paragraph[position].id.toString()
 
                         return params
