@@ -54,7 +54,7 @@ class PrefsActivity : AppCompatActivity() {
         }
 
         bind.btnChange.setOnClickListener {
-            if(bind.txtOldPass.text.toString() == bind.txtConPass.text.toString()){
+            if(bind.txtNewPass.text.toString() == bind.txtConPass.text.toString()){
                 val q = Volley.newRequestQueue(this)
                 val url = "https://ubaya.me/native/160421053/change.php"
                 val stringRequest = object : StringRequest(Request.Method.POST, url, Response.Listener {
